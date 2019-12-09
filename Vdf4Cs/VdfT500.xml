@@ -1,0 +1,241 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Vdf Version="1.0">
+  <ValueDescTable>
+    <!--Fill表示如果值不足两位则填充0-->
+    <ValueDesc Name="Year" Type="BCD" Factor="1" Offset="2000" Fill="true" CanFillAlpha="false"/>
+    <ValueDesc Name="Month" Type="BCD" Factor="1" Offset="0" Minimum="1" Maximum="12" Fill="true" CanFillAlpha="false"/>
+    <ValueDesc Name="Date" Type="BCD" Factor="1" Offset="0" Minimum="1" Maximum="31" Fill="true" CanFillAlpha="false"/>
+    <ValueDesc Name="Version" Type="BCD" Seperator="." Offset="0" Fill="true" CanFillAlpha="true"/>
+    <ValueDesc Name="Present" Type="Xncode">
+      <Entry Value="1" Description="present"/>
+      <Entry Value="0" Description="no present"/>
+    </ValueDesc>
+    <ValueDesc Name="TyreType" Type="Xncode">
+      <Entry Value="0" Description="R17, 轮胎半径:335mm"/>
+      <Entry Value="1" Description="R18, 轮胎半径:332mm"/>
+      <Entry Value="2" Description="R19, 轮胎半径:335mm"/>
+      <Entry Value="3" Description="011:R15, 轮胎半径:335mm"/>
+      <Entry Value="4" Description="R16, 轮胎半径:333mm"/>
+      <Entry Value="Others" Description="Reserved"/>
+    </ValueDesc>
+    <ValueDesc Name="EcuSupplier" Type="Xncode">
+      <Entry Value="0" Description="UAES "/>
+      <Entry Value="1" Description="Delphi"/>
+    </ValueDesc>
+    <ValueDesc Name="PDCType" Type="Xncode">
+      <Entry Value="0" Description="2探头"/>
+      <Entry Value="1" Description="3探头"/>
+      <Entry Value="2" Description="4探头"/>
+      <Entry Value="3" Description="Reserved"/>
+    </ValueDesc>
+    <ValueDesc Name="CC" Type="Xncode">
+      <Entry Value="0" Description="精度0.05625"/>
+      <Entry Value="1" Description="精度1"/>
+    </ValueDesc>
+    <ValueDesc Name="FuelTankType" Type="Xncode">
+      <Entry Value="0" Description="国五"/>
+      <Entry Value="1" Description="国六"/>
+    </ValueDesc>
+    <ValueDesc Name="ClearMaintain" Type="Xncode">
+      <Entry Value="0" Description="无效值"/>
+      <Entry Value="90" Description="清除"/>
+    </ValueDesc>
+    <ValueDesc Name="BacklinghtLevelType" Type="Xncode">
+      <Entry Value="1" Description="Fuel Gauge Dial Backlight Level"/>
+      <Entry Value="2" Description="Coolant Gauge Dial Backlight Level"/>
+      <Entry Value="3" Description="TFT Screen Backlight Level"/>
+      <Entry Value="4" Description="无效(标准中没有，仅供测试使用)"/>
+    </ValueDesc>
+    <ValueDesc Name="BacklinghtLevel" Type="Phy" Factor="0.392156" Offset="0" Maximum="100" Minimum="0" Unit="%"/>
+    <ValueDesc Name="BuzzerControlType" Type="Xncode">
+      <Entry Value="1" Description="Turn buzzer warning"/>
+      <Entry Value="0" Description="无效(标准中没有，仅供测试使用)"/>
+    </ValueDesc>
+    <ValueDesc Name="BuzzerStatus" Type="Xncode">
+      <Entry Value="0" Description="Silence"/>
+      <Entry Value="1" Description="Ring with Certain frequency Always sounding"/>
+      <Entry Value="2" Description="无效(标准中没有，仅供测试使用)"/>
+    </ValueDesc>
+    <ValueDesc Name="GagesControlType" Type="Xncode">
+      <Entry Value="1" Description="Speedmeter"/>
+      <Entry Value="2" Description="Tachometer"/>
+      <Entry Value="3" Description="Coolant gauge"/>
+      <Entry Value="4" Description="Fuel gauge"/>
+      <Entry Value="5" Description="无效(标准中没有，仅供测试使用)"/>
+    </ValueDesc>
+    <ValueDesc Name="GagesStatus" Type="Xncode">
+      <Entry Value="0" Description="0刻度线位置"/>
+      <Entry Value="1" Description="对应表1/2位置"/>
+      <Entry Value="2" Description="对应表最大位置"/>
+      <Entry Value="3" Description="无效(标准中没有，仅供测试使用)"/>
+    </ValueDesc>
+    <ValueDesc Name="SegmentDisplayControlType" Type="Xncode">
+      <Entry Value="1" Description="TFT screen display red in full screen"/>
+      <Entry Value="2" Description="TFT screen display green in full screen"/>
+      <Entry Value="3" Description="TFT screen display blue in full screen"/>
+      <Entry Value="4" Description="TFT screen display black and white square in full screen"/>
+      <Entry Value="5" Description="无效(标准中没有，仅供测试使用)"/>
+    </ValueDesc>
+    <ValueDesc Name="SegmentDisplayStatus" Type="Xncode">
+      <Entry Value="0" Description="OFF"/>
+      <Entry Value="1" Description="ON"/>
+      <Entry Value="2" Description="无效(标准中没有，仅供测试使用)"/>
+    </ValueDesc>
+    <ValueDesc Name="SwitchStatus" Type="Xncode">
+      <Entry Value="0" Description="OFF"/>
+      <Entry Value="1" Description="ON"/>
+    </ValueDesc>
+    <ValueDesc Name="DtcNumber" Type="Xncode">
+      <Entry Value="0x04621A" Description="燃油阻值对地短路"/>
+      <Entry Value="0x04631B" Description="燃油阻值对电源开路"/>
+      <Entry Value="0xF00316" Description="电池电压对地短路"/>
+      <Entry Value="0xF00317" Description="电池电压对电源短路"/>
+      <Entry Value="0xC07388" Description="总线BusOff"/>
+      <Entry Value="0xC10001" Description="EMS节点通信超时"/>
+      <Entry Value="0xC10101" Description="TCU节点通信超时"/>
+      <Entry Value="0xC12801" Description="EPB节点通信超时"/>
+      <Entry Value="0xC12901" Description="ESP节点通信超时"/>
+      <Entry Value="0xC13101" Description="EPS节点通信超时"/>
+      <Entry Value="0xC14001" Description="BCM-F节点通信超时"/>
+      <Entry Value="0xC15101" Description="SRS节点通信超时"/>
+      <Entry Value="0xC16300" Description="DVD节点通信超时"/>
+      <Entry Value="0xC16701" Description="PEPS3节点通信超时"/>
+      <Entry Value="0xC16900" Description="PDC节点通信超时"/>
+      <Entry Value="0xC16A00" Description="BCM-R节点通信超时"/>
+      <Entry Value="0xC18101" Description="ALS节点通信超时"/>
+      <Entry Value="0xC23601" Description="PEPS节点通信超时"/>
+      <Entry Value="0xC16400" Description="AC节点通信超时"/>
+      <Entry Value="0xC16700" Description="AVM节点通信超时"/>
+      <Entry Value="0x953D01" Description="Break light error"/>
+      <Entry Value="0x953E01" Description="EPC light error"/>
+      <Entry Value="0x953F01" Description="TCU light error"/>
+      <Entry Value="0x954001" Description="Airbag light error"/>
+      <Entry Value="0x954101" Description="ESC light error"/>
+      <Entry Value="0x954401" Description="ABS light error"/>
+      <Entry Value="0x954501" Description="MIL light error"/>
+      <Entry Value="0x954601" Description="Epb fault light error"/>
+      <Entry Value="0x954701" Description="ESC OFF light error"/>
+    </ValueDesc>
+  </ValueDescTable>
+  <MessageTable>
+    <!--ECU版本号数据标识符-->
+    <Message Name="ECUVersionNumberDataIdentifier" Description="ECU版本号数据"
+             ByteLen="6">
+      <Signal Name="Year" StartBit="0" BitLen="8" ByteOrder="Intel" ValueDesc="Year"/>
+      <Signal Name="Month" StartBit="8" BitLen="8" ByteOrder="Intel" ValueDesc="Month"/>
+      <Signal Name="Date" StartBit="16" BitLen="8" ByteOrder="Intel" ValueDesc="Date"/>
+      <Signal Name="Hard version" StartBit="24" BitLen="16" ByteOrder="Intel" ValueDesc="Version"/>
+      <Signal Name="Soft version" StartBit="40" BitLen="16" ByteOrder="Intel" ValueDesc="Version"/>
+    </Message>
+
+    <!--配置校准-->
+    <Message Name="Configuration Calibration" Description="配置校准" ByteLen="4">
+      <!--第0个字节-->
+      <Signal Name="EPS" StartBit="0" BitLen="1" ByteOrder="Intel" ValueDesc="Present"/>
+      <Signal Name="前排乘客安全带" StartBit="1" BitLen="1" ByteOrder="Intel" ValueDesc="Present"/>
+      <Signal Name="CRUISE" StartBit="2" BitLen="1" ByteOrder="Intel" ValueDesc="Present"/>
+      <Signal Name="PEPS" StartBit="3" BitLen="1" ByteOrder="Intel" ValueDesc="Present"/>
+      <Signal Name="ESC_OFF" StartBit="4" BitLen="1" ByteOrder="Intel" ValueDesc="Present"/>
+      <Signal Name="ALS" StartBit="5" BitLen="1" ByteOrder="Intel" ValueDesc="Present"/>
+      <Signal Name="TPMS" StartBit="6" BitLen="1" ByteOrder="Intel" ValueDesc="Present"/>
+      <Signal Name="DRL" StartBit="7" BitLen="1" ByteOrder="Intel" ValueDesc="Present"/>
+      <!--第1个字节-->
+      <Signal Name="发动机防盗" StartBit="8" BitLen="1" ByteOrder="Intel" ValueDesc="Present"/>
+      <Signal Name="EPB" StartBit="9" BitLen="1" ByteOrder="Intel" ValueDesc="Present"/>
+      <Signal Name="AVH" StartBit="10" BitLen="1" ByteOrder="Intel" ValueDesc="Present"/>
+      <Signal Name="启停工作指示灯" StartBit="11" BitLen="1" ByteOrder="Intel" ValueDesc="Present"/>
+      <Signal Name="PDC" StartBit="12" BitLen="1" ByteOrder="Intel" ValueDesc="Present"/>
+      <Signal Name="Tyre type" StartBit="13" BitLen="3" ByteOrder="Intel" ValueDesc="TyreType"/>
+      <!--第2个字节-->
+      <Signal Name="DVD" StartBit="16" BitLen="1" ByteOrder="Intel" ValueDesc="Present"/>
+      <Signal Name="TCU" StartBit="17" BitLen="1" ByteOrder="Intel" ValueDesc="Present"/>
+      <Signal Name="SRS" StartBit="18" BitLen="1" ByteOrder="Intel" ValueDesc="Present"/>
+      <Signal Name="超速报警" StartBit="19" BitLen="1" ByteOrder="Intel" ValueDesc="Present"/>
+      <Signal Name="驾驶员安全带" StartBit="20" BitLen="1" ByteOrder="Intel" ValueDesc="Present"/>
+      <Signal Name="油箱" StartBit="21" BitLen="1" ByteOrder="Intel" ValueDesc="Present"/>
+      <Signal Name="ECU Supplier" StartBit="22" BitLen="1" ByteOrder="Intel" ValueDesc="EcuSupplier"/>
+      <Signal Name="GPF" StartBit="23" BitLen="1" ByteOrder="Intel" ValueDesc="Present"/>
+      <!--第3个字节-->
+      <Signal Name="疲劳驾驶" StartBit="24" BitLen="1" ByteOrder="Intel" ValueDesc="Present"/>
+      <Signal Name="PDC Type" StartBit="25" BitLen="2" ByteOrder="Intel" ValueDesc="PDCType"/>
+      <Signal Name="CC" StartBit="27" BitLen="2" ByteOrder="Intel" ValueDesc="CC"/>
+      <Signal Name="ACC" StartBit="28" BitLen="1" ByteOrder="Intel" ValueDesc="Present"/>
+      <Signal Name="油箱类型" StartBit="29" BitLen="1" ByteOrder="Intel" ValueDesc="FuelTankType"/>
+      <Signal Name="APA" StartBit="30" BitLen="1" ByteOrder="Intel" ValueDesc="Present"/>
+      <Signal Name="NVS" StartBit="31" BitLen="1" ByteOrder="Intel" ValueDesc="Present"/>
+    </Message>
+    
+    <!--清除保养-->
+    <Message Name="Clear maintain" Description="配置校准" ByteLen="1">
+      <Signal Name="Clear maintain" StartBit="0" BitLen="8" ByteOrder="Intel" ValueDesc="ClearMaintain"/>
+    </Message>
+    
+    <!--背光级别-->
+    <Message Name="Backlight Level" Description="背光级别IO控制" ByteLen="2">
+      <Signal Name="Backlinght Level type" StartBit="0" BitLen="8" ByteOrder="Intel" ValueDesc="BacklinghtLevelType"/>
+      <Signal Name="Backlight Level" StartBit="8" BitLen="8" ByteOrder="Intel" ValueDesc="BacklinghtLevel"/>
+    </Message>
+    
+    <!--蜂鸣器-->
+    <Message Name="Buzzer" Description="蜂鸣器IO控制" ByteLen="2">
+      <Signal Name="control type" StartBit="0" BitLen="8" ByteOrder="Intel" ValueDesc="BuzzerControlType"/>
+      <Signal Name="status" StartBit="8" BitLen="8" ByteOrder="Intel" ValueDesc="BuzzerStatus"/>
+    </Message>
+    
+    <!--表盘-->
+    <Message Name="Gages" Description="表盘IO控制" ByteLen="2">
+      <Signal Name="control type" StartBit="0" BitLen="8" ByteOrder="Intel" ValueDesc="GagesControlType"/>
+      <Signal Name="status" StartBit="8" BitLen="8" ByteOrder="Intel" ValueDesc="GagesStatus"/>
+    </Message>
+    
+    <!--tft显示屏-->
+    <Message Name="Segment Display(TFT)" Description="TFT显示屏" ByteLen="2">
+      <Signal Name="control type" StartBit="0" BitLen="8" ByteOrder="Intel" ValueDesc="SegmentDisplayControlType"/>
+      <Signal Name="status" StartBit="8" BitLen="8" ByteOrder="Intel" ValueDesc="SegmentDisplayStatus"/>
+    </Message>
+
+    <!--指示符-->
+    <Message Name="Indicators" Description="指示符" ByteLen="6">
+      <!--字节0-->
+      <Signal Name="Fuel lamp" StartBit="0" BitLen="1" ByteOrder="Intel" ValueDesc="SwitchStatus"/>
+      <Signal Name="Passenger safety belt lamp" StartBit="1" BitLen="1" ByteOrder="Intel" ValueDesc="SwitchStatus"/>
+      <Signal Name="Air bag lamp" StartBit="2" BitLen="1" ByteOrder="Intel" ValueDesc="SwitchStatus"/>
+      <Signal Name="EPC lamp" StartBit="3" BitLen="1" ByteOrder="Intel" ValueDesc="SwitchStatus"/>
+      <Signal Name="EPS lamp" StartBit="4" BitLen="1" ByteOrder="Intel" ValueDesc="SwitchStatus"/>
+      <Signal Name="MIL lamp" StartBit="5" BitLen="1" ByteOrder="Intel" ValueDesc="SwitchStatus"/>
+      <Signal Name="ESP lamp" StartBit="6" BitLen="1" ByteOrder="Intel" ValueDesc="SwitchStatus"/>
+      <Signal Name="Drive safety belt lamp" StartBit="7" BitLen="1" ByteOrder="Intel" ValueDesc="SwitchStatus"/>
+      <!--字节1-->
+      <Signal Name="Front fog lamp" StartBit="8" BitLen="1" ByteOrder="Intel" ValueDesc="SwitchStatus"/>
+      <Signal Name="Location fog lamp" StartBit="9" BitLen="1" ByteOrder="Intel" ValueDesc="SwitchStatus"/>
+      <Signal Name="Rear fog lamp" StartBit="10" BitLen="1" ByteOrder="Intel" ValueDesc="SwitchStatus"/>
+      <Signal Name="Turn left lamp" StartBit="11" BitLen="1" ByteOrder="Intel" ValueDesc="SwitchStatus"/>
+      <Signal Name="EPB lamp" StartBit="12" BitLen="1" ByteOrder="Intel" ValueDesc="SwitchStatus"/>
+      <Signal Name="Oil pressure lamp" StartBit="13" BitLen="1" ByteOrder="Intel" ValueDesc="SwitchStatus"/>
+      <Signal Name="High beam lamp" StartBit="14" BitLen="1" ByteOrder="Intel" ValueDesc="SwitchStatus"/>
+      <Signal Name="EPB fault lamp" StartBit="15" BitLen="1" ByteOrder="Intel" ValueDesc="SwitchStatus"/>
+      <!--字节2-->
+      <Signal Name="Turn right lamp" StartBit="16" BitLen="1" ByteOrder="Intel" ValueDesc="SwitchStatus"/>
+      <Signal Name="Break Fault lamp" StartBit="17" BitLen="1" ByteOrder="Intel" ValueDesc="SwitchStatus"/>
+      <Signal Name="ESP Off lamp" StartBit="18" BitLen="1" ByteOrder="Intel" ValueDesc="SwitchStatus"/>
+      <Signal Name="Door open lamp" StartBit="19" BitLen="1" ByteOrder="Intel" ValueDesc="SwitchStatus"/>
+      <Signal Name="Tire pressure lamp" StartBit="20" BitLen="1" ByteOrder="Intel" ValueDesc="SwitchStatus"/>
+      <Signal Name="AVH lamp" StartBit="21" BitLen="1" ByteOrder="Intel" ValueDesc="SwitchStatus"/>
+      <Signal Name="AFS lamp" StartBit="22" BitLen="1" ByteOrder="Intel" ValueDesc="SwitchStatus"/>
+      <Signal Name="Maintain lamp" StartBit="23" BitLen="1" ByteOrder="Intel" ValueDesc="SwitchStatus"/>
+      <!--字节3-->
+      <Signal Name="ABS lamp" StartBit="24" BitLen="1" ByteOrder="Intel" ValueDesc="SwitchStatus"/>
+      <Signal Name="Cruise lamp" StartBit="25" BitLen="1" ByteOrder="Intel" ValueDesc="SwitchStatus"/>
+      <Signal Name="DRL lamp" StartBit="26" BitLen="1" ByteOrder="Intel" ValueDesc="SwitchStatus"/>
+      <Signal Name="Transmission fault lamp" StartBit="27" BitLen="1" ByteOrder="Intel" ValueDesc="SwitchStatus"/>
+      <Signal Name="Engine prevent steal lamp" StartBit="28" BitLen="1" ByteOrder="Intel" ValueDesc="SwitchStatus"/>
+      <Signal Name="Coolant temperature lamp" StartBit="29" BitLen="1" ByteOrder="Intel" ValueDesc="SwitchStatus"/>
+      <Signal Name="PEPS lamp" StartBit="30" BitLen="1" ByteOrder="Intel" ValueDesc="SwitchStatus"/>
+      <Signal Name="Start stop system fault lamp" StartBit="31" BitLen="1" ByteOrder="Intel" ValueDesc="SwitchStatus"/>
+      <!--字节4-->
+      <Signal Name="Start stop system work lamp" StartBit="32" BitLen="1" ByteOrder="Intel" ValueDesc="SwitchStatus"/>
+      <Signal Name="Battery charge lamp" StartBit="33" BitLen="1" ByteOrder="Intel" ValueDesc="SwitchStatus"/>
+      <!--字节5-->
+    </Message>
+  </MessageTable>
+</Vdf>
