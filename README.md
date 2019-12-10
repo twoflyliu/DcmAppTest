@@ -67,9 +67,184 @@ DcmAppTest相当于VehicleSpy3和Canoe一个子集，只包含车载诊断测试
 
 ![xp-vs2015-light](./Docs/Images/XP/XP-VS2015-Light.png "VS2015 Light主题运行效果")
 
+## 安装
+
+安装步骤：
+
+1. 首先您需要拥有一个广成科技的USBCAN盒，然后安装好相应的驱动程序
+2. 请确保您的PC上已经晚装了.net 4以上的版本，如果没有请进行安装
+3. 在后面的历史版本中，下载一个最新的版本, 您会得到一个zip文件，将之解压到指定的目录中
+4. 在前两个文件都满足后，那么打开目录中的exe文件即可运行程序
+
+
+历史版本:
+
++ [V1.0.0](https://raw.githubusercontent.com/twoflyliu/DcmAppTest/master/Dist/DcmAppTest-V1.0.0.zip "V1.0.0版本")
+
 ## 使用指导
 
-TODO:
+下面的例子，将会介绍DcmAppTest的常用操作，主要设计一下几个内容(实际上就是描述Demos Dummy工程的创建)：
+
+1. 如何定义自己的插件类型
+2. 如何安装自己的插件类型
+3. 如何设置要发送的数据格式
+4. 如何设置接收数据的解析方式
+
+### 如何定义自己的插件
+
+1. 使用VS2017社区版(我使用的版本，您至少需求>=此版本, 这样工程才可以进行编译)Visual C#创建类库工程, 入下图所示：
+
+![创建插件类库工程](./Docs/Images/Tutor/DefineSecurityPlugin/Step1-CreatePlugLib.png "创建插件类库工程")
+
+2. 设置项目引用的类型
+
++ 需要引用SecurityAccessContract, 因为SecurityAccessContract项目中定义了插件接口的类型，入下图所示：
+
+![设置项目引用类型](./Docs/Images/Tutor/DefineSecurityPlugin/Step2-SetReference.png "设置项目引用类型")
+
++ 需要引用System.ComponentModel.Composition程序集，因为此程序集定义了插件导出的方式，入下图所示：
+
+![引用System.ComponentModel.Composition](./Docs/Images/Tutor/DefineSecurityPlugin/Step2-System.ComponentModel.Composition.png "引用System.ComponentModel.Composition")
+
+3. 实现插件
+
+在实现插件之前，需要介绍一下SecurityAccessContract.ISecurityAccessAlgorithm接口
+
+此接口定义如下：
+
+```{.cs}
+mespace SecurityAccessContract
+{
+    public interface ISecurityAccessAlgorithm
+    {
+        /// <summary>
+        /// 算法实现
+        /// </summary>
+        /// <param name="securityLevel">算法安全级别</param>
+        /// <param name="rawData">原始数据</param>
+        /// <returns>加密后的数据</returns>
+        List<byte> Encrypt(int securityLevel, List<byte> rawData);
+
+        /// <summary>
+        /// 算法名称
+        /// </summary>
+        string Name { get;  }
+    
+    }
+}
+```
+
+此接收就是插件需要实现，并且导出的接口， 其中：
+
++ Encrypt方法用于根据种子数据来生成对应的Key, 根据ISO14229定义， securityLevel是27 SID后面的数据，一般为奇数；rawData 为27 奇数请求返回的种子数据，
+此方法返回值为Key数据
++ Name 表示安全算法的名称，因为最终所有的插件需要被放置在一个组合框中供用户来选择插件类型，所以插件需要一个可以被显示的字符串，而这个方法就是返回这个字符串
+
+下面来看一下Dummy安全算法的实现，具体的实现, 代码如下所示：
+
+```{.cs}
+namespace DummySecurityAccess
+{
+    [Export(typeof(ISecurityAccessAlgorithm))]
+    public class SecurityAccessAlgorithm : ISecurityAccessAlgorithm
+    {
+        public const int ExtendSessionLevel = 0x01;
+
+        public string Name => "Dummy";
+
+        public List<byte> Encrypt(int securityLevel, List<byte> rawData)
+        {
+            if (securityLevel % 2 == 0)
+            {
+                securityLevel -= 1;
+            
+            }
+
+            if (securityLevel < 0)
+            {
+                throw new ArgumentException("security level must be great than 0");
+            
+            }
+
+            if (ExtendSessionLevel == securityLevel)
+            {
+                return ExtendSessionLevelEncrypt(rawData);
+            
+            }
+            else
+            {
+                throw new ArgumentException("Unsupported security level " + securityLevel.ToString());
+            
+            }
+        
+        }
+
+        private List<byte> ExtendSessionLevelEncrypt(List<byte> seed)
+        {
+            if (seed.Count != 4)
+            {
+                throw new ArgumentException("seed data length must be 4");
+            
+            }
+
+            List<byte> key = new List<byte>();
+            const byte increVal = 0x55;
+
+            foreach (var s in seed)
+            {
+                key.Add((byte)(increVal + s));
+            
+            }
+
+            return key;
+        
+        }
+    
+    }
+
+}
+```
+
+首先，定义SecurityAccessAlgorithm类，并且让此类实现ISecurityAccessAlgorithm, 除此之外，此类还有一个Attribute:`[Export(typeof(ISecurityAccessAlgorithm))]`, 只有定义
+了这个Attribute，那么这个插件才可以被当作插件识别到
+
+正如何您所看到，插件的名称为Dummy(`public string Name => "Dummy"`), 插件安全算法的实现，是只支持安全级别为1的级别；并且要求种子的长度为4；当前两者都满足的时候，
+会将总之的每个值都加上0x55作为Key返回
+
+
+4. 编译生成， 终止应该生成一个名为DummySecurityAccess.dll文件, 入下图所示：
+![插件文件](./Docs/Images/Tutor/DefineSecurityPlugin/Step3-FinalPlugFile.png "最终生成的插件文件")
+
+
+### 如何安装自己的插件类型
+
+1. 解压缩历史版本中列出的压缩文件到指定目录中
+2. 如果解压缩目录中没有addins文件，则新建此文件夹
+3. 将上面最后编译生成的插件DummySecurityAccess.dll拷贝到此文件夹中即可
+
+### 如何设置要发送的数据格式
+
+1. 定义一个Xncode类型的数据格式
+
+具体步骤:TODO
+
+2. 定义一个Phy类型的数据格式
+
+具体步骤:TODO
+
+3. 定义一个Bcd类型的数据格式
+
+具体步骤:TODO
+
+4. 定义一个ASCII类型的数据格式
+
+具体步骤:TODO
+
+### 如何设置接收数据的解析方式
+
+具体的设置步骤和上面的类似，下面只举一个例子，其他的都是类似的
+
+TODO
 
 ## 项目结构介绍
 
@@ -100,4 +275,4 @@ DcmConfig项目的一个子配置，这儿为什么把他单独领出来呢？�
 
 ## 参考
 
-+ [ecanspy3]("https://github.com/TwoFlyLiu/ecanspy3" "另外一个ECAN的组态软件，主要负责模拟整车的应用报文数据")
++ [ecanspy3](https://github.com/TwoFlyLiu/ecanspy3 "另外一个ECAN的组态软件，主要负责模拟整车的应用报文数据")
