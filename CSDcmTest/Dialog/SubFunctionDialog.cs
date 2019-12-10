@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DcmConfig;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -21,10 +22,14 @@ namespace CSDcmTest.Dialog
 
         public const string Empty = "无";
 
+        public Vdf4Cs.VdfDocument VdfDocument { get; set; }
+
         public SubFunctionDialog(Operation operation, Vdf4Cs.VdfDocument vdoc)
         {
             InitializeComponent();
             Text = (operation == Operation.New) ? "新建子功能" : "编辑子功能";
+
+            VdfDocument = vdoc;
 
             // 初始化地址类型
             var arr = Enum.GetValues(typeof(DcmConfig.CanAddressType));
@@ -203,6 +208,53 @@ namespace CSDcmTest.Dialog
                     MessageBoxIcon.Error);
                 e.Cancel = true;
             }
+
+            if (!ValidateDataLen(e))
+            {
+                return;
+            }
+        }
+
+        protected bool ValidateDataLen(CancelEventArgs e)
+        {
+            if (VdfDocument != null 
+                && textBoxName.Text != null
+                && !string.IsNullOrEmpty(comboBoxParsingDirection.Text))
+            {
+                //只有发送和双向才需要进行发送数据长度校验
+                ParsingDirection direction;
+                if (!Enum.TryParse<ParsingDirection>(comboBoxParsingDirection.Text,
+                    out direction))
+                {
+                    return true;
+                }
+
+                if (!(direction == ParsingDirection.Send ||
+                    direction == ParsingDirection.Bidirection))
+                {
+                    return true;
+                }
+
+                var msg = VdfDocument.Message(comboBoxMessage.Text);
+                if (msg != null && msg.ByteLen > DataLen)
+                {
+                    MessageBox.Show("解析报文数据长度比被解析数据长度大", "校验失败",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    e.Cancel = true;
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        private void comboBoxMessage_Validating(object sender, CancelEventArgs e)
+        {
+            if (!ValidateDataLen(e))
+            {
+                return;
+            }
         }
     }
+
+    
 }

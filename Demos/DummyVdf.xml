@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Vdf Version="1.0">
+  <ValueDescTable>
+    <ValueDesc Name="CommunicationType" Type="XNCODE">
+      <Entry Value="1" Description="NormalCommunicationMessages " />
+      <Entry Value="2" Description="NetworkManagementCommunicationMessages " />
+      <Entry Value="3" Description="NormalCommunicationMessages and Network-ManagementCommunicationMessages" />
+    </ValueDesc>
+    <ValueDesc Name="Present" Type="XNCODE">
+      <Entry Value="0" Description="Not Configured" />
+      <Entry Value="1" Description="Configured" />
+    </ValueDesc>
+    <ValueDesc Name="Year" Type="BCD" Factor="1" Offset="0" Minimum="0" Maximum="65535" CanFillAlpha="False" />
+    <ValueDesc Name="BCD" Type="BCD" Factor="1" Offset="0" Minimum="0" Maximum="255" CanFillAlpha="False" />
+    <ValueDesc Name="Version" Type="BCD" Seperator="." CanFillAlpha="True" />
+    <ValueDesc Name="CarSpeed" Type="PHY" Factor="0.1" Offset="0" Unit="km/h" Minimum="0" Maximum="255" />
+    <ValueDesc Name="ASCII" Type="ASCII" />
+  </ValueDescTable>
+  <MessageTable>
+    <Message Name="Communication Type" Description="Communication Type" ByteLen="1">
+      <Signal Name="CommunicationType" StartBit="0" BitLen="8" ByteOrder="Intel" ValueDesc="CommunicationType" />
+    </Message>
+    <Message Name="Configuration" Description="Configuration" ByteLen="2">
+      <Signal Name="Config0" StartBit="0" BitLen="1" ByteOrder="Intel" ValueDesc="Present" />
+      <Signal Name="Config1" StartBit="1" BitLen="1" ByteOrder="Intel" ValueDesc="Present" />
+      <Signal Name="Config2" StartBit="2" BitLen="1" ByteOrder="Intel" ValueDesc="Present" />
+      <Signal Name="Config3" StartBit="3" BitLen="1" ByteOrder="Intel" ValueDesc="Present" />
+      <Signal Name="Config4" StartBit="4" BitLen="1" ByteOrder="Intel" ValueDesc="Present" />
+      <Signal Name="Config5" StartBit="5" BitLen="1" ByteOrder="Intel" ValueDesc="Present" />
+      <Signal Name="Config6" StartBit="6" BitLen="1" ByteOrder="Intel" ValueDesc="Present" />
+      <Signal Name="Config7" StartBit="7" BitLen="1" ByteOrder="Intel" ValueDesc="Present" />
+      <Signal Name="Config8" StartBit="8" BitLen="1" ByteOrder="Intel" ValueDesc="Present" />
+      <Signal Name="Config9" StartBit="9" BitLen="1" ByteOrder="Intel" ValueDesc="Present" />
+      <Signal Name="Config10" StartBit="10" BitLen="1" ByteOrder="Intel" ValueDesc="Present" />
+      <Signal Name="Config11" StartBit="11" BitLen="1" ByteOrder="Intel" ValueDesc="Present" />
+      <Signal Name="Config12" StartBit="12" BitLen="1" ByteOrder="Intel" ValueDesc="Present" />
+      <Signal Name="Config13" StartBit="13" BitLen="1" ByteOrder="Intel" ValueDesc="Present" />
+      <Signal Name="Config14" StartBit="14" BitLen="1" ByteOrder="Intel" ValueDesc="Present" />
+      <Signal Name="Config15" StartBit="15" BitLen="1" ByteOrder="Intel" ValueDesc="Present" />
+    </Message>
+    <Message Name="Date" Description="Date" ByteLen="4">
+      <Signal Name="Year" StartBit="7" BitLen="16" ByteOrder="Motorola" ValueDesc="Year" />
+      <Signal Name="Month" StartBit="16" BitLen="8" ByteOrder="Intel" ValueDesc="BCD" />
+      <Signal Name="Day" StartBit="24" BitLen="8" ByteOrder="Intel" ValueDesc="BCD" />
+    </Message>
+    <Message Name="Version" Description="Version" ByteLen="2">
+      <Signal Name="Version" StartBit="0" BitLen="16" ByteOrder="Intel" ValueDesc="Version" />
+    </Message>
+    <Message Name="CarSpeed" Description="CarSpeed" ByteLen="2">
+      <Signal Name="CarSpeed" StartBit="0" BitLen="16" ByteOrder="Intel" ValueDesc="CarSpeed" />
+    </Message>
+    <Message Name="CarSpeedMSB" Description="CarSpeedMSB" ByteLen="2">
+      <Signal Name="CarSpeedMSB" StartBit="7" BitLen="16" ByteOrder="Motorola" ValueDesc="CarSpeed" />
+    </Message>
+    <Message Name="Name" Description="Name" ByteLen="24">
+      <Signal Name="Name" StartBit="0" BitLen="192" ByteOrder="Intel" ValueDesc="ASCII" />
+    </Message>
+  </MessageTable>
+</Vdf>

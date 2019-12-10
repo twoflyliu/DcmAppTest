@@ -296,6 +296,7 @@ namespace CSDcmTest
             else
             {
                 VdfSignal signal = cell.Tag as VdfSignal;
+                //signal居然可能为空
 
                 // 这儿只是进行验证，不更新数据
                 try

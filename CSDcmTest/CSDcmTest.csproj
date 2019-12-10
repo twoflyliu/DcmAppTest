@@ -227,7 +227,6 @@
       <DependentUpon>ToolWindow.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="CSDcmTest_TemporaryKey.pfx" />
-    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

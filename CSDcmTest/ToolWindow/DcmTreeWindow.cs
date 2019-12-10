@@ -376,7 +376,10 @@ namespace CSDcmTest
             {
                 SaveAs();
             }
-            Save(DocumentFile);
+            else
+            {
+                Save(DocumentFile);
+            }
         }
 
         private void Save(string documentFile)
@@ -388,6 +391,8 @@ namespace CSDcmTest
             DcmConfig.DcmConfig.Save(dcmDocument, documentFile);
             mainForm.ContentChanged = false;
             DocumentFile = documentFile;
+
+            mainForm.OnLoadDocumentDone(documentFile, true);
         }
 
         internal void SaveAs()
@@ -530,7 +535,13 @@ namespace CSDcmTest
 
                             subFunction.Data = Utils.NewInitializedList(subFunction.DataLen,
                                 subFunction.Data);
-                            
+
+                            if (subFunction.ParsingDirection != dlg.ParsingDirection)
+                            {
+                                subFunction.ParsingDirection = dlg.ParsingDirection;
+                                dcmDocument.UpdateReceiveSubFunctionTable();
+                            }
+
 
                             mainForm.ContentChanged = true;
 

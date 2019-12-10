@@ -1,0 +1,227 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Config Version="1.3">
+  <Vdf File="DummyVdf.xml" />
+  <Cfg>
+    <!--Can Id设置-->
+    <PhysicalRequestId>0x701</PhysicalRequestId>
+    <FunctionRequestId>0x702</FunctionRequestId>
+    <ResponseId>0x703</ResponseId>
+    <!--安全访问设置-->
+    <SecurityAccessType>Dummy</SecurityAccessType>
+    <!--下面是维持在线相关设置-->
+    <CanTickEnabled>False</CanTickEnabled>
+    <CanTickPeriod>3</CanTickPeriod>
+    <SuppressTickResponse>True</SuppressTickResponse>
+  </Cfg>
+  <Services>
+    <Service>
+      <Name>Diagnostic Session Control</Name>
+      <SubFunctions>
+        <SubFunction>
+          <Name>Default Session</Name>
+          <Prefix>10 01</Prefix>
+          <Type>Hex</Type>
+          <Len>0</Len>
+          <Address>Physical</Address>
+          <ParsingDirection>Send</ParsingDirection>
+        </SubFunction>
+        <SubFunction>
+          <Name>Programming Session</Name>
+          <Prefix>10 02</Prefix>
+          <Type>Hex</Type>
+          <Len>0</Len>
+          <Address>Physical</Address>
+          <ParsingDirection>Send</ParsingDirection>
+        </SubFunction>
+        <SubFunction>
+          <Name>Extend Session</Name>
+          <Prefix>10 03</Prefix>
+          <Type>Hex</Type>
+          <Len>0</Len>
+          <Address>Physical</Address>
+          <ParsingDirection>Send</ParsingDirection>
+        </SubFunction>
+      </SubFunctions>
+    </Service>
+    <Service>
+      <Name>Security Access</Name>
+      <SubFunctions>
+        <SubFunction>
+          <Name>Request Seed</Name>
+          <Prefix>27 01</Prefix>
+          <Type>Hex</Type>
+          <Len>0</Len>
+          <Address>Physical</Address>
+          <ParsingDirection>Send</ParsingDirection>
+        </SubFunction>
+        <SubFunction>
+          <Name>Send Key</Name>
+          <Prefix>27 02</Prefix>
+          <Type>Hex</Type>
+          <Len>4</Len>
+          <Address>Physical</Address>
+          <ParsingDirection>Send</ParsingDirection>
+        </SubFunction>
+      </SubFunctions>
+    </Service>
+    <Service>
+      <Name>Communication Control</Name>
+      <SubFunctions>
+        <SubFunction>
+          <Name>EnableRxAndTx</Name>
+          <Prefix>28 00</Prefix>
+          <Type>Hex</Type>
+          <Len>1</Len>
+          <Address>Physical</Address>
+          <Message>Communication Type</Message>
+          <ParsingDirection>Send</ParsingDirection>
+        </SubFunction>
+        <SubFunction>
+          <Name>EnableRxAndDisableTx</Name>
+          <Prefix>28 01</Prefix>
+          <Type>Hex</Type>
+          <Len>1</Len>
+          <Address>Physical</Address>
+          <Message>Communication Type</Message>
+          <ParsingDirection>Send</ParsingDirection>
+        </SubFunction>
+        <SubFunction>
+          <Name>DisableRxAndEnableTx</Name>
+          <Prefix>28 02</Prefix>
+          <Type>Hex</Type>
+          <Len>1</Len>
+          <Address>Physical</Address>
+          <Message>Communication Type</Message>
+          <ParsingDirection>Send</ParsingDirection>
+        </SubFunction>
+        <SubFunction>
+          <Name>DisableRxAndTx</Name>
+          <Prefix>28 03</Prefix>
+          <Type>Hex</Type>
+          <Len>1</Len>
+          <Address>Physical</Address>
+          <Message>Communication Type</Message>
+          <ParsingDirection>Send</ParsingDirection>
+        </SubFunction>
+      </SubFunctions>
+    </Service>
+    <Service>
+      <Name>Write Data By Identifier</Name>
+      <SubFunctions>
+        <SubFunction>
+          <Name>Configuration</Name>
+          <Prefix>2E 00 01</Prefix>
+          <Type>Hex</Type>
+          <Len>2</Len>
+          <Address>Physical</Address>
+          <Message>Configuration</Message>
+          <ParsingDirection>Send</ParsingDirection>
+        </SubFunction>
+        <SubFunction>
+          <Name>Date</Name>
+          <Prefix>2E 00 02</Prefix>
+          <Type>Hex</Type>
+          <Len>4</Len>
+          <Address>Physical</Address>
+          <Message>Date</Message>
+          <ParsingDirection>Send</ParsingDirection>
+        </SubFunction>
+        <SubFunction>
+          <Name>Version</Name>
+          <Prefix>2E 00 03</Prefix>
+          <Type>Hex</Type>
+          <Len>2</Len>
+          <Address>Physical</Address>
+          <Message>Version</Message>
+          <ParsingDirection>Send</ParsingDirection>
+        </SubFunction>
+        <SubFunction>
+          <Name>CarSpeedLSB</Name>
+          <Prefix>2E 00 04</Prefix>
+          <Type>Hex</Type>
+          <Len>2</Len>
+          <Address>Physical</Address>
+          <Message>CarSpeed</Message>
+          <ParsingDirection>Send</ParsingDirection>
+        </SubFunction>
+        <SubFunction>
+          <Name>CarSpeedMSB</Name>
+          <Prefix>2E 00 05</Prefix>
+          <Type>Hex</Type>
+          <Len>2</Len>
+          <Address>Physical</Address>
+          <Message>CarSpeedMSB</Message>
+          <ParsingDirection>Send</ParsingDirection>
+        </SubFunction>
+        <SubFunction>
+          <Name>Name</Name>
+          <Prefix>2E 00 06</Prefix>
+          <Type>Hex</Type>
+          <Len>24</Len>
+          <Address>Physical</Address>
+          <Message>Name</Message>
+          <ParsingDirection>Send</ParsingDirection>
+        </SubFunction>
+      </SubFunctions>
+    </Service>
+    <Service>
+      <Name>Read Data By Identifier</Name>
+      <SubFunctions>
+        <SubFunction>
+          <Name>Configuration</Name>
+          <Prefix>22 00 01</Prefix>
+          <Type>Hex</Type>
+          <Len>0</Len>
+          <Address>Physical</Address>
+          <Message>Configuration</Message>
+          <ParsingDirection>Receive</ParsingDirection>
+        </SubFunction>
+        <SubFunction>
+          <Name>Date</Name>
+          <Prefix>22 00 02</Prefix>
+          <Type>Hex</Type>
+          <Len>0</Len>
+          <Address>Physical</Address>
+          <Message>Date</Message>
+          <ParsingDirection>Receive</ParsingDirection>
+        </SubFunction>
+        <SubFunction>
+          <Name>Version</Name>
+          <Prefix>22 00 03</Prefix>
+          <Type>Hex</Type>
+          <Len>0</Len>
+          <Address>Physical</Address>
+          <Message>Version</Message>
+          <ParsingDirection>Receive</ParsingDirection>
+        </SubFunction>
+        <SubFunction>
+          <Name>CarSpeedLSB</Name>
+          <Prefix>22 00 04</Prefix>
+          <Type>Hex</Type>
+          <Len>0</Len>
+          <Address>Physical</Address>
+          <Message>CarSpeed</Message>
+          <ParsingDirection>Receive</ParsingDirection>
+        </SubFunction>
+        <SubFunction>
+          <Name>CarSpeedMSB</Name>
+          <Prefix>22 00 05</Prefix>
+          <Type>Hex</Type>
+          <Len>0</Len>
+          <Address>Physical</Address>
+          <Message>CarSpeedMSB</Message>
+          <ParsingDirection>Receive</ParsingDirection>
+        </SubFunction>
+        <SubFunction>
+          <Name>Name</Name>
+          <Prefix>22 00 06</Prefix>
+          <Type>Hex</Type>
+          <Len>0</Len>
+          <Address>Physical</Address>
+          <Message>Name</Message>
+          <ParsingDirection>Receive</ParsingDirection>
+        </SubFunction>
+      </SubFunctions>
+    </Service>
+  </Services>
+</Config>

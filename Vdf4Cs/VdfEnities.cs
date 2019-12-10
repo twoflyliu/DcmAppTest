@@ -467,9 +467,17 @@ namespace Vdf4Cs
                 {
                     var val = GetValue(data, signal);
                     hexStr = string.Format("{0:X}", val);
-                    int idata = Convert.ToInt32(hexStr);
-                    idata = idata * Factor + Offset;
-                    return idata.ToString();
+                    try
+                    {
+                        int idata = Convert.ToInt32(hexStr);
+                        idata = idata * Factor + Offset;
+                        return idata.ToString();
+                    }
+                    catch (Exception)
+                    {
+                        // 没有按照规则来，仅报价数字字符
+                        return hexStr;
+                    }
                 }
                 catch (Exception)
                 {

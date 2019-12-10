@@ -124,14 +124,14 @@
             this.comboBoxAddress.FormattingEnabled = true;
             this.comboBoxAddress.Location = new System.Drawing.Point(150, 221);
             this.comboBoxAddress.Name = "comboBoxAddress";
-            this.comboBoxAddress.Size = new System.Drawing.Size(193, 23);
+            this.comboBoxAddress.Size = new System.Drawing.Size(150, 23);
             this.comboBoxAddress.TabIndex = 7;
             // 
             // textBoxDataLen
             // 
             this.textBoxDataLen.Location = new System.Drawing.Point(150, 157);
             this.textBoxDataLen.Name = "textBoxDataLen";
-            this.textBoxDataLen.Size = new System.Drawing.Size(92, 25);
+            this.textBoxDataLen.Size = new System.Drawing.Size(150, 25);
             this.textBoxDataLen.TabIndex = 5;
             this.textBoxDataLen.Text = "0";
             this.textBoxDataLen.Validating += new System.ComponentModel.CancelEventHandler(this.textBoxDataLen_Validating);
@@ -151,8 +151,9 @@
             this.comboBoxMessage.FormattingEnabled = true;
             this.comboBoxMessage.Location = new System.Drawing.Point(150, 279);
             this.comboBoxMessage.Name = "comboBoxMessage";
-            this.comboBoxMessage.Size = new System.Drawing.Size(193, 23);
+            this.comboBoxMessage.Size = new System.Drawing.Size(362, 23);
             this.comboBoxMessage.TabIndex = 9;
+            this.comboBoxMessage.Validating += new System.ComponentModel.CancelEventHandler(this.comboBoxMessage_Validating);
             // 
             // label6
             // 
@@ -169,7 +170,7 @@
             this.comboBoxParsingDirection.FormattingEnabled = true;
             this.comboBoxParsingDirection.Location = new System.Drawing.Point(150, 331);
             this.comboBoxParsingDirection.Name = "comboBoxParsingDirection";
-            this.comboBoxParsingDirection.Size = new System.Drawing.Size(193, 23);
+            this.comboBoxParsingDirection.Size = new System.Drawing.Size(150, 23);
             this.comboBoxParsingDirection.TabIndex = 9;
             // 
             // SubFunctionDialog
