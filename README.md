@@ -26,6 +26,7 @@ DcmAppTest相当于VehicleSpy3和Canoe一个子集，只包含车载诊断测试
 + 支持Dock布局
 + 支持自动保存用户自定以的Dock布局，用户可以根据自己的喜好来调整Dock布局
 + 支持主题设置，当前支持VS2015-Blue, VS2015-Dark, VS2015-Light三个主题（这儿需要非常感谢DockSuite这个开源项目）
++ 安全算法以插件的形式进行管理，这样方便扩展
 
 ## 优势
 
@@ -36,6 +37,7 @@ DcmAppTest相当于VehicleSpy3和Canoe一个子集，只包含车载诊断测试
 + 内部使用C# .net4 winform作为开发平台，当前即使XP系统也可以安装.net4
 + 支持Dock，并且运用用户调整布局，支持自动保存
 + 支持主题设置功能
++ 安全算法以插件的形式进行管理，这样方便扩展
 
 ## 软件快照
 
@@ -87,8 +89,8 @@ DcmAppTest相当于VehicleSpy3和Canoe一个子集，只包含车载诊断测试
 
 1. 如何定义自己的插件类型
 2. 如何安装自己的插件类型
-3. 如何设置要发送的数据格式
-4. 如何设置接收数据的解析方式
+3. 主应用窗口的基本介绍
+4. 基本使用
 
 ### 如何定义自己的插件
 
@@ -112,8 +114,8 @@ DcmAppTest相当于VehicleSpy3和Canoe一个子集，只包含车载诊断测试
 
 此接口定义如下：
 
-```{.cs}
-mespace SecurityAccessContract
+```cs
+namespace SecurityAccessContract
 {
     public interface ISecurityAccessAlgorithm
     {
@@ -142,7 +144,7 @@ mespace SecurityAccessContract
 
 下面来看一下Dummy安全算法的实现，具体的实现, 代码如下所示：
 
-```{.cs}
+```cs
 namespace DummySecurityAccess
 {
     [Export(typeof(ISecurityAccessAlgorithm))]
@@ -222,29 +224,87 @@ namespace DummySecurityAccess
 2. 如果解压缩目录中没有addins文件，则新建此文件夹
 3. 将上面最后编译生成的插件DummySecurityAccess.dll拷贝到此文件夹中即可
 
-### 如何设置要发送的数据格式
+### 主应用窗口的基本介绍
 
-1. 定义一个Xncode类型的数据格式
+主窗口的功能分类入下图所示：
 
-具体步骤:TODO
+![主窗口功能分类](./Docs/Images/Tutor/MainForm/MainFormCategory-Main.png "主窗口功能分类")
 
-2. 定义一个Phy类型的数据格式
+Vdf窗口分类入下图所示：
 
-具体步骤:TODO
+![Vdf窗口分类](./Docs/Images/Tutor/MainForm/MainFormCategory-Vdf.png "Vdf窗口分类")
 
-3. 定义一个Bcd类型的数据格式
+简单介绍一些里面设计的改变
 
-具体步骤:TODO
+1. 服务 - 对应于ISO14229中的服务，他们一般是一一对应关系，当然你也可以定义一些ISO14229之外的服务，本软件也是支持的
+2. 子功能 - 对应于ISO14229中的子功能，但是不是绝对的对应，这儿更准确的将，可以成为功能，每个子功能对应的功能（因为ISO14229中定义某些服务是没有子功能的）
+3. 配置窗口中设计到一下改变：
 
-4. 定义一个ASCII类型的数据格式
++ 物理请求CANID， 熟悉CAN的朋友肯定熟悉此改变
++ 功能请求CANiD
++ 相应CANID
++ 安全算法类型，这儿以组合框的形式展现，当您下载的时候，会出现Dummy，Dummy就是之前我们安装的插件
++ 维持在线的相关设置，也是ISO协议定义的一个服务
 
-具体步骤:TODO
+4. 值描述文件中，设计到一下改变：
 
-### 如何设置接收数据的解析方式
++ 报文 - 定义了一个被引用的名称，描述和字节长度
++ 信号 - 定义了一个被引用的名称，起始位，长度，字节序和值描述
++ 值描述 - 定义了值对应的描述 （四种类型值） 
 
-具体的设置步骤和上面的类似，下面只举一个例子，其他的都是类似的
+### 基本使用
 
-TODO
+#### 新建一个文件, 可以点击菜单，或者工具按钮，入下图所示（仅展示工具按钮）：
+
+![新建文件](./Docs/Images/Tutor/BaseUsage/NewDocument.png "新建没文件")
+
+#### 保存文件到指定路径, 入下图所示：
+
+![保存文件](./Docs/Images/Tutor/BaseUsage/SaveDocument.png "保存文件")
+
+#### 创建Communication Control服务, 入下图所示：
+
+![创建通信控制服务](./Docs/Images/Tutor/BaseUsage/CreateCommunicationControlService.png "创建通信控制服务")
+
+
+####  创建Communication Type 值描述，入下图所示：
+
+![创建通信类型值描述](./Docs/Images/Tutor/BaseUsage/1.CreateCommunicationTypeValDesc.png "创建通信类型值描述")
+
+![创建创建Xncode值描述后的界面](./Docs/Images/Tutor/BaseUsage/1.AfterCommunicationTypeValDesc.png "")
+
+![编辑值描述名称](./Docs/Images/Tutor/BaseUsage/3.UpdateCommunicationTypeName.png "")
+
+![编辑值描述内容](./Docs/Images/Tutor/BaseUsage/4.UpdateCommunicationTypeContent.png "")
+
+#### 创建Communication Type报文, 入下图所示
+
+![创建报文](./Docs/Images/Tutor/BaseUsage/1.CreateCommunicationTypeMessage.png "")
+
+![更新报文](./Docs/Images/Tutor/BaseUsage/1.UpdateCommunicationTypeMessage.png "")
+
+#### 创建Communition Type信号， 入下图所示
+
+![创建信号](./Docs/Images/Tutor/BaseUsage/1.CreateCommunicationTypeSignal.png "")
+
+![更新信号](./Docs/Images/Tutor/BaseUsage/1.UpdateCommunicationTypeSignal.png "")
+
+
+#### 创建EnableRxAndTx子功能，入下图所示
+
+![创建子功能](./Docs/Images/Tutor/BaseUsage/1.createEnableRxAndTx.png "")
+
+![效果](./Docs/Images/Tutor/BaseUsage/1.afterCreateEnableRxAndTx.png "")
+
+
+### 其他
+
+熟悉上面的用户，即基本入门了，对于其他功能，可以参考Demos/Dummy.dcmproj文件
+
+对于其他的功能值简单说一下：
+1. 对于需要接收某些接收到的数据，只需要将子功能的解析方法设置位Receive即可
+2. 对于其他的只描述，比如Bcd, Phy, ASCII，只需要在在添加只描述菜单中选择相应的值描述即可
+
 
 ## 项目结构介绍
 
